@@ -1,6 +1,11 @@
 const User = require("../models/User");
 
 module.exports = {
+  async index(request, response) {
+    users = await User.find();
+    return response.json(users);
+  },
+
   async store(request, response) {
     const { name, email } = request.body;
 
@@ -10,7 +15,7 @@ module.exports = {
       user = await User.create({
         name,
         email,
-        stars: [true, false, false, false, false],
+        stars: [false, false, false, false, false],
         active: true
       });
     }

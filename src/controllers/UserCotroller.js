@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const cypto = require("crypto");
+("");
 
 module.exports = {
   async index(request, response) {

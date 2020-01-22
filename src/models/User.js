@@ -24,13 +24,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  stars: [
-    {
-      type: Boolean,
-      require: true,
-      default: false
-    }
-  ],
+  stars: {
+    type: [Boolean],
+    require: true,
+    default: [false, false, false, false, false]
+  },
   active: {
     type: Boolean,
     require: true,

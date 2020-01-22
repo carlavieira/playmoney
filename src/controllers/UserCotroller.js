@@ -7,16 +7,17 @@ module.exports = {
   },
 
   async store(request, response) {
-    const { name, email } = request.body;
+    const { email, password, name, birthday, gender } = request.body;
 
     let user = await User.findOne({ email });
 
     if (!user) {
       user = await User.create({
-        name,
         email,
-        stars: [false, false, false, false, false],
-        active: true
+        password,
+        name,
+        birthday,
+        gender
       });
     }
 

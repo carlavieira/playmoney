@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const cypto = require("crypto-js");
+//const cypto = require("crypto-js");
 
 const UserSchema = new mongoose.Schema({
   email: {

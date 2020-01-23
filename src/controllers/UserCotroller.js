@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const Bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 module.exports = {
   async index(request, response) {
@@ -13,9 +13,10 @@ module.exports = {
       let user = await User.findOne({ email });
 
       if (!user) {
+        let hash = bcrypt.hashSync(password, 10);
         user = await User.create({
           email,
-          password,
+          password: hash,
           name,
           birthday,
           gender
@@ -28,6 +29,20 @@ module.exports = {
       return response
         .status(400)
         .json({ message: "Registration failed", error });
+    }
+  },
+
+  async login(request, response) {
+    const { email, password } = request.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) return response.status(404).json({ error: "User not found" });
+
+    if (bcrypt.compareSync(password, user.password)) {
+      return response.json(user);
+    } else {
+      return response.status(400).json({ error: "Invalid password" });
     }
   }
 };

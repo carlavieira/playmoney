@@ -27,7 +27,7 @@ module.exports = {
       } else {
         return response.status(400).json({ error: "User already exists" });
       }
-    } catch {
+    } catch (error) {
       return response
         .status(400)
         .json({ message: "Registration failed", error });
@@ -88,7 +88,7 @@ module.exports = {
     }
   },
 
-  async reserPassword(request, response) {
+  async resetPassword(request, response) {
     
     const { email, token, password } = require.body;
 
